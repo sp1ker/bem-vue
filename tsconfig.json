@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "declaration": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "outDir": "build",
+    "target": "es5",
+    /* Module Resolution Options */
+    "esModuleInterop": true,
+    /* Strict Type-Checking Options */
+    "strict": true,
+    /* Additional Checks */
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false
+  },
+  "exclude": [
+    "**/test/**"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@bem-vue/core",
+  "version": "0.0.1",
+  "description": "BEM Vue Core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sp1ker/bem-vue.git"
+  },
+  "keywords": [
+    "bem",
+    "vue",
+    "vuejs"
+  ],
+  "author": "Gavrilov Evgeniy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sp1ker/bem-vue/issues"
+  },
+  "homepage": "https://github.com/Sp1ker/bem-vue#readme",
+  "dependencies": {
+    "@bem-react/classname": "^1.4.4"
+  }
+}
