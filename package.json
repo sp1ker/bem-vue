@@ -1,6 +1,6 @@
 {
   "name": "bem-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "BEM Vue",
   "main": "index.js",
   "scripts": {

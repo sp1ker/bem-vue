@@ -2,7 +2,7 @@ import { cn } from '@bem-react/classname';
 
 //TODO: set types
 
-function withBemMod(blockName: string, mod: any, modProps: any, enhance: any) {
+function withBemMod(blockName: string, mod: any, modProps: any, enhance?: any) {
     return function WithBemMod(WrappedComponent: any) {
         let ModifiedComponent: any;
 
