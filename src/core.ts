@@ -1,8 +1,8 @@
-import {cn} from '@bem-react/classname';
+import { cn } from '@bem-react/classname';
 
 //TODO: set types
 
-export function withBemMod(blockName: string, mod: any, modProps: any, enhance: any) {
+function withBemMod(blockName: string, mod: any, modProps: any, enhance: any) {
     return function WithBemMod(WrappedComponent: any) {
         let ModifiedComponent: any;
 
@@ -13,7 +13,7 @@ export function withBemMod(blockName: string, mod: any, modProps: any, enhance: 
                 const props = context.props;
                 const isMatched = (key: string) => (props)[key] === mod[key];
                 const isStarMatched = (key: string) => mod[key] === '*' &&
-                    Boolean((props)[key]);
+                  Boolean((props)[key]);
 
                 if (Object.keys(mod).every(key => isMatched(key) || isStarMatched(key))) {
                     let mods = Object.keys(mod).reduce((acc: any, key: string) => {
@@ -48,3 +48,12 @@ export function withBemMod(blockName: string, mod: any, modProps: any, enhance: 
         };
     };
 }
+
+function compose(...funcs: any[]) {
+    return funcs.reduce((a, b) => (...args: any[]) => a(b(...args)), (arg: any) => arg);
+}
+
+export {
+    withBemMod,
+    compose,
+};
