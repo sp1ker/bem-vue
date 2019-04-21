@@ -2,6 +2,7 @@
 
 //TODO: dev or prod
 // ts to js
-import core from './src/core';
+import { compose as compose1, withBemMod as withBemMod1 } from './src/core';
 
-export default core;
+export const compose = compose1;
+export const withBemMod = withBemMod1;
