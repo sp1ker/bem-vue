@@ -1,10 +1,12 @@
 {
-  "name": "bem-vue",
-  "version": "0.0.4",
+  "name": "@spiker/core",
+  "version": "0.0.5",
   "description": "BEM Vue",
-  "main": "index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,9 @@
   },
   "homepage": "https://github.com/Sp1ker/bem-vue#readme",
   "dependencies": {
-    "@bem-react/classname": "^1.4.4"
+    "@bem-react/classname": "1.4.4"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.4"
   }
 }
