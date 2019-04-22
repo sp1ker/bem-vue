@@ -1,5 +1,5 @@
 {
-  "name": "@spiker/core",
+  "name": "bem-vue",
   "version": "0.0.5",
   "description": "BEM Vue",
   "main": "lib/index.js",
