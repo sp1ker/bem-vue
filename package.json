@@ -27,6 +27,7 @@
     "@bem-react/classname": "1.4.4"
   },
   "devDependencies": {
-    "typescript": "^3.4.4"
+    "typescript": "^3.4.4",
+    "vue": "^2.6.10"
   }
 }
