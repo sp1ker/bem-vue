@@ -1,6 +1,5 @@
 import { ClassNameFormatter, cn, NoStrictEntityMods } from '@bem-react/classname';
-import { ComponentOptions, CreateElement, FunctionalComponentOptions, RenderContext } from 'vue';
-import { Vue } from 'vue/types/vue';
+import Vue, { ComponentOptions, CreateElement, FunctionalComponentOptions, RenderContext } from 'vue';
 
 export type Enhance<V extends Vue> = (WrappedComponent: ComponentOptions<V> | FunctionalComponentOptions) => FunctionalComponentOptions;
 
@@ -10,6 +9,7 @@ export function withBemMod<V extends Vue>(blockName: string, mod: NoStrictEntity
 
     return {
       functional: true,
+      name: WrappedComponent.name,
       props: Object.keys(mod).reduce((mods: { [key: string]: {} }, modName: string) => {
         mods[modName] = {};
         return mods;

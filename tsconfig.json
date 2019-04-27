@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
-    /* Basic Options */
     "declaration": true,
     "module": "es2015",
     "moduleResolution": "node",
     "outDir": "lib",
     "target": "es5",
-    /* Module Resolution Options */
+    "lib": [
+      "es2015",
+      "es2017",
+      "dom"
+    ],
     "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
