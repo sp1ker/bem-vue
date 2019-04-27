@@ -56,14 +56,24 @@ export function withBemMod<V extends Vue>(blockName: string, mod: NoStrictEntity
 }
 
 export function compose(...funcs: any[]) {
+  let mods = {};
+
   return funcs.reduce(
     (a, b) => {
-      return (...args: any[]) => {
-        return a(b(...args));
+      return (component: any) => {
+        mods = Object.assign({}, mods, component.hasOwnProperty('props') ? component.props : component.options.props);
+
+        if (component.hasOwnProperty('props')) {
+          component.props = mods;
+        } else {
+          component.options.props = mods;
+        }
+
+        return a(b(component));
       };
     },
     (arg: any) => {
-      console.log('last-function', arg);
+      arg.props = Object.assign({}, arg.props, mods);
       return arg;
     },
   );
