@@ -1,16 +1,15 @@
 {
   "name": "bem-vue",
-  "version": "0.0.6",
-  "description": "BEM Vue",
+  "version": "0.1.0",
+  "description": "Core package helps organize and manage components with BEM modifiers in Vue.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sp1ker/bem-vue.git"
+    "url": "git+https://github.com/sp1ker/bem-vue.git"
   },
   "keywords": [
     "bem",
@@ -18,16 +17,16 @@
     "vuejs"
   ],
   "author": "Gavrilov Evgeniy",
-  "license": "ISC",
+  "license": "MPL 2.0",
   "bugs": {
-    "url": "https://github.com/Sp1ker/bem-vue/issues"
+    "url": "https://github.com/sp1ker/bem-vue/issues"
   },
-  "homepage": "https://github.com/Sp1ker/bem-vue#readme",
+  "homepage": "https://github.com/sp1ker/bem-vue#readme",
   "dependencies": {
-    "@bem-react/classname": "1.4.4"
+    "@bem-react/classname": "1.5.0"
   },
   "devDependencies": {
-    "typescript": "^3.4.4",
+    "typescript": "^3.4.5",
     "vue": "^2.6.10"
   }
 }
