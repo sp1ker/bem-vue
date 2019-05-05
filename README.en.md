@@ -122,7 +122,7 @@ Finally, in `App.vue` you need compose only necessary the variants with the basi
     </div>
 </template>
 <script>
-  import { Button as ButtonPresenter } from './Components/Button/Button.vue';
+  import ButtonPresenter from './Components/Button/Button.vue';
   import { withButtonTypeLink } from './Components/Button/_type/Button_type_link';
   import { withButtonThemeAction } from './Components/Button/_theme/Button_theme_action';
 
