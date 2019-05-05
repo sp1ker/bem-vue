@@ -45,12 +45,15 @@ export function withBemMod<V extends Vue>(blockName: string, mod: NoStrictEntity
           }
 
           return h(ModifiedComponent, {
-            props: props,
             ...context.data,
+            props: props,
           }, context.children);
         }
 
-        return h(WrappedComponent, context.data, context.children);
+        return h(WrappedComponent, {
+          ...context.data,
+          props: props,
+        }, context.children);
       },
     };
   };
