@@ -1,5 +1,5 @@
-import { ClassNameFormatter, cn, NoStrictEntityMods } from '@bem-react/classname';
-import Vue, { ComponentOptions, CreateElement, FunctionalComponentOptions, RenderContext } from 'vue';
+import {ClassNameFormatter, cn, NoStrictEntityMods} from '@bem-react/classname';
+import Vue, {ComponentOptions, CreateElement, FunctionalComponentOptions, RenderContext} from 'vue';
 
 export * from '@bem-react/classname';
 export type Enhance<V extends Vue> = (WrappedComponent: ComponentOptions<V> | FunctionalComponentOptions) => FunctionalComponentOptions;
@@ -65,19 +65,14 @@ export function compose(...funcs: any[]) {
   return funcs.reduce(
     (a, b) => {
       return (component: any) => {
-        mods = Object.assign({}, mods, component.hasOwnProperty('props') ? component.props : component.options.props);
-
-        if (component.hasOwnProperty('props')) {
-          component.props = mods;
-        } else {
-          component.options.props = mods;
-        }
+        mods = Object.assign({}, mods, component.hasOwnProperty('props') ? component.props : {});
+        component.props = mods;
 
         return a(b(component));
       };
     },
     (arg: any) => {
-      arg.props = Object.assign({}, arg.props, mods);
+      arg.props = Object.assign({}, arg.props ? arg.props : {}, mods);
       return arg;
     },
   );
