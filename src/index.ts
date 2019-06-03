@@ -29,7 +29,7 @@ export function withBemMod<V extends Vue>(blockName: string, mod: NoStrictEntity
             return acc;
           }, {});
 
-          const modifierClassName = entity(mods).replace(`${entity()} `, '');
+          const modifierClassName = (entity(mods) + ' ').replace(`${entity()} `, '').trim();
 
           context.data.class = {
             ...context.data.class,
