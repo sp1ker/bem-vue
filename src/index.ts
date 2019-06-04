@@ -1,7 +1,7 @@
-import {ClassNameFormatter, cn, NoStrictEntityMods} from '@bem-react/classname';
-import Vue, {ComponentOptions, CreateElement, FunctionalComponentOptions, RenderContext} from 'vue';
+import {ClassNameFormatter, cn, NoStrictEntityMods} from "@bem-react/classname";
+import Vue, {ComponentOptions, CreateElement, FunctionalComponentOptions, RenderContext} from "vue";
 
-export * from '@bem-react/classname';
+export * from "@bem-react/classname";
 export type Enhance<V extends Vue> = (WrappedComponent: ComponentOptions<V> | FunctionalComponentOptions) => FunctionalComponentOptions;
 
 export function withBemMod<V extends Vue>(blockName: string, mod: NoStrictEntityMods, enhance?: Enhance<V>) {
@@ -19,17 +19,16 @@ export function withBemMod<V extends Vue>(blockName: string, mod: NoStrictEntity
         const entity: ClassNameFormatter = cn(blockName);
         const props = context.props;
         const isMatched = (key: string) => (props)[key] === mod[key];
-        const isStarMatched = (key: string) => mod[key] === '*' &&
-          Boolean((props)[key]);
+        const isStarMatched = (key: string) => mod[key] === "*" && Boolean((props)[key]);
 
         if (Object.keys(mod).every(key => isMatched(key) || isStarMatched(key))) {
           let mods = Object.keys(mod).reduce((acc: any, key: string) => {
-            if (mod[key] !== '*') acc[key] = mod[key];
+            if (mod[key] !== "*") acc[key] = mod[key];
 
             return acc;
           }, {});
 
-          const modifierClassName = (entity(mods) + ' ').replace(`${entity()} `, '').trim();
+          const modifierClassName = (entity(mods) + " ").replace(`${entity()} `, "").trim();
 
           context.data.class = {
             ...context.data.class,
@@ -63,17 +62,17 @@ export function compose(...funcs: any[]) {
   let mods = {};
 
   return funcs.reduce(
-    (a, b) => {
-      return (component: any) => {
-        mods = Object.assign({}, mods, component.hasOwnProperty('props') ? component.props : {});
-        component.props = mods;
+      (a, b) => {
+        return (component: any) => {
+          mods = Object.assign({}, mods, component.hasOwnProperty("props") ? component.props : {});
+          component.props = mods;
 
-        return a(b(component));
-      };
-    },
-    (arg: any) => {
-      arg.props = Object.assign({}, arg.props ? arg.props : {}, mods);
-      return arg;
-    },
+          return a(b(component));
+        };
+      },
+      (arg: any) => {
+        arg.props = Object.assign({}, arg.props ? arg.props : {}, mods);
+        return arg;
+      },
   );
 }

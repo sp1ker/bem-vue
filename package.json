@@ -1,12 +1,14 @@
 {
   "name": "bem-vue",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Core package helps organize and manage components with BEM modifiers in Vue.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "jest"
+    "compile": "tsc",
+    "test": "jest",
+    "build": "npm run test && npm run compile",
+    "publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
@@ -47,10 +49,12 @@
       "json",
       "vue"
     ],
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/src/$1"
+    },
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "testURL": "http://localhost/"
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$"
   }
 }

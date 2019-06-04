@@ -10,6 +10,10 @@
       "es2017",
       "dom"
     ],
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,5 +23,8 @@
     "noUnusedParameters": false
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/test/*"]
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ]
 }
