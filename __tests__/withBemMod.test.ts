@@ -1,95 +1,104 @@
-import {mount} from "@vue/test-utils";
-import {cn, compose, withBemMod} from "@/index.ts";
-import {CreateElement} from "vue";
+import { cn, compose, withBemMod } from '@/index.ts';
+import { mount } from '@vue/test-utils';
+import { CreateElement } from 'vue';
 
-describe("withBemMod", () => {
-    const cnPresenter = cn("Presenter");
+describe('withBemMod', () => {
+  const cnPresenter = cn('Presenter');
 
-    const Presenter = {
-        name: "Presenter",
-        props: {},
-        render(h: CreateElement) {
-            return h("div", {class: cnPresenter()});
-        }
-    };
+  const Presenter = {
+    name: 'Presenter',
+    props: {},
+    render(h: CreateElement) {
+      return h('div', { class: cnPresenter() });
+    },
+  };
 
-    it("should has only Block class", () => {
-        const Enhanced1 = withBemMod(cnPresenter(), {theme: "normal"});
-        const ResultComponent = compose(Enhanced1)(Presenter);
-        const componentWrapper = mount(ResultComponent);
+  it('should has only Block class', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { theme: 'normal' });
+    const ResultComponent = compose(Enhanced1)(Presenter);
+    const componentWrapper = mount(ResultComponent);
 
-        expect(componentWrapper.classes()).toEqual(["Presenter"]);
+    expect(componentWrapper.classes()).toEqual(['Presenter']);
+  });
+
+  it('should add modifier class for theme prop with single modifier', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { theme: 'normal' });
+
+    const ResultComponent = compose(Enhanced1)(Presenter);
+    const componentWrapper = mount(ResultComponent, {
+      propsData: {
+        theme: 'normal',
+      },
     });
 
-    it("should add modifier class for theme prop with single modifier", () => {
-        const Enhanced1 = withBemMod(cnPresenter(), {theme: "normal"});
+    expect(componentWrapper.classes()).toEqual(['Presenter', 'Presenter_theme_normal']);
+  });
 
-        const ResultComponent = compose(Enhanced1)(Presenter);
-        const componentWrapper = mount(ResultComponent, {
-            propsData: {
-                theme: "normal"
-            }
-        });
+  it('should add modifier class for theme prop with multiple modifiers', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { theme: 'normal' });
+    const Enhanced2 = withBemMod(cnPresenter(), { view: 'default' });
 
-        expect(componentWrapper.classes()).toEqual(["Presenter", "Presenter_theme_normal"]);
+    const ResultComponent = compose(
+      Enhanced1,
+      Enhanced2,
+    )(Presenter);
+    const componentWrapper = mount(ResultComponent, {
+      propsData: {
+        theme: 'normal',
+      },
     });
 
-    it("should add modifier class for theme prop with multiple modifiers", () => {
-        const Enhanced1 = withBemMod(cnPresenter(), {theme: "normal"});
-        const Enhanced2 = withBemMod(cnPresenter(), {view: "default"});
+    expect(componentWrapper.classes()).toEqual(['Presenter', 'Presenter_theme_normal']);
+  });
 
-        const ResultComponent = compose(Enhanced1, Enhanced2)(Presenter);
-        const componentWrapper = mount(ResultComponent, {
-            propsData: {
-                theme: "normal"
-            }
-        });
+  it('should add modifier class for view prop', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { theme: 'normal' });
+    const Enhanced2 = withBemMod(cnPresenter(), { view: 'default' });
 
-        expect(componentWrapper.classes()).toEqual(["Presenter", "Presenter_theme_normal"]);
+    const ResultComponent = compose(
+      Enhanced1,
+      Enhanced2,
+    )(Presenter);
+
+    const componentWrapper = mount(ResultComponent, {
+      propsData: {
+        view: 'default',
+      },
     });
 
-    it("should add modifier class for view prop", () => {
-        const Enhanced1 = withBemMod(cnPresenter(), {theme: "normal"});
-        const Enhanced2 = withBemMod(cnPresenter(), {view: "default"});
+    expect(componentWrapper.classes()).toEqual(['Presenter', 'Presenter_view_default']);
+  });
 
-        const ResultComponent = compose(Enhanced1, Enhanced2)(Presenter);
+  it('should add modifier class for view and theme props', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { theme: 'normal' });
+    const Enhanced2 = withBemMod(cnPresenter(), { view: 'default' });
 
-        const componentWrapper = mount(ResultComponent, {
-            propsData: {
-                view: "default"
-            }
-        });
+    const ResultComponent = compose(
+      Enhanced1,
+      Enhanced2,
+    )(Presenter);
 
-        expect(componentWrapper.classes()).toEqual(["Presenter", "Presenter_view_default"]);
+    const componentWrapper = mount(ResultComponent, {
+      propsData: {
+        theme: 'normal',
+        view: 'default',
+      },
     });
 
-    it("should add modifier class for view and theme props", () => {
-        const Enhanced1 = withBemMod(cnPresenter(), {theme: "normal"});
-        const Enhanced2 = withBemMod(cnPresenter(), {view: "default"});
+    expect(componentWrapper.classes()).toEqual(['Presenter', 'Presenter_theme_normal', 'Presenter_view_default']);
+  });
 
-        const ResultComponent = compose(Enhanced1, Enhanced2)(Presenter);
+  it('should not add modifier class for star matched prop', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { star: '*' });
 
-        const componentWrapper = mount(ResultComponent, {
-            propsData: {
-                theme: "normal",
-                view: "default"
-            }
-        });
+    const ResultComponent = compose(Enhanced1)(Presenter);
 
-        expect(componentWrapper.classes()).toEqual(["Presenter", "Presenter_theme_normal", "Presenter_view_default"]);
+    const componentWrapper = mount(ResultComponent, {
+      propsData: {
+        star: 'star value',
+      },
     });
 
-    it("should not add modifier class for star matched prop", () => {
-        const Enhanced1 = withBemMod(cnPresenter(), {star: "*"});
-
-        const ResultComponent = compose(Enhanced1)(Presenter);
-
-        const componentWrapper = mount(ResultComponent, {
-            propsData: {
-                star: "star value"
-            }
-        });
-
-        expect(componentWrapper.classes()).toEqual(["Presenter"]);
-    });
+    expect(componentWrapper.classes()).toEqual(['Presenter']);
+  });
 });

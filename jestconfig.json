@@ -1,0 +1,15 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "ts",
+    "json",
+    "vue"
+  ],
+  "moduleNameMapper": {
+    "@/(.*)": "<rootDir>/src/$1"
+  },
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$"
+}
