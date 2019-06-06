@@ -1,17 +1,16 @@
 import { cn, compose, withBemMod } from '@/index.ts';
 import { mount } from '@vue/test-utils';
-import { CreateElement } from 'vue';
+import Vue, { CreateElement } from 'vue';
 
 describe('withBemMod', () => {
   const cnPresenter = cn('Presenter');
 
-  const Presenter = {
+  const Presenter = Vue.extend({
     name: 'Presenter',
-    props: {},
     render(h: CreateElement) {
-      return h('div', { class: cnPresenter() });
+      return h('div', { class: cnPresenter() }, this.$slots.default);
     },
-  };
+  });
 
   it('should has only Block class', () => {
     const Enhanced1 = withBemMod(cnPresenter(), { theme: 'normal' });
@@ -100,5 +99,41 @@ describe('withBemMod', () => {
     });
 
     expect(componentWrapper.classes()).toEqual(['Presenter']);
+  });
+
+  it('should not add boolean modifier class', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { big: true });
+
+    const ResultComponent = compose(Enhanced1)(Presenter);
+
+    const componentWrapper = mount(ResultComponent, {
+      propsData: {
+        big: true,
+      },
+    });
+
+    expect(componentWrapper.classes()).toEqual(['Presenter', 'Presenter_big']);
+  });
+
+  it('should add modifier enhancer', () => {
+    const Enhanced1 = withBemMod(cnPresenter(), { enhanced: true }, Component => {
+      return {
+        functional: true,
+        render(h: CreateElement, context) {
+          return h(Component, context.data, ['Enhanced text']);
+        },
+      };
+    });
+
+    const ResultComponent = compose(Enhanced1)(Presenter);
+
+    const componentWrapper = mount(ResultComponent, {
+      propsData: {
+        enhanced: true,
+      },
+    });
+
+    expect(componentWrapper.text()).toEqual('Enhanced text');
+    expect(componentWrapper.classes()).toEqual(['Presenter', 'Presenter_enhanced']);
   });
 });
