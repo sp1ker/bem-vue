@@ -120,6 +120,28 @@ describe('withBemMod', () => {
 
       expect(componentWrapper.classes()).toEqual(['Presenter', 'Presenter_big']);
     });
+
+    it('should mix classes', () => {
+      const Enhanced1 = withBemMod(cnPresenter(), { modifier: true });
+
+      const ResultComponent = compose(Enhanced1)(Presenter);
+
+      const PresenterWrapper = Vue.extend({
+        name: 'PresenterWrapper',
+        render(h: CreateElement) {
+          return h(ResultComponent, {
+            class: { 'mix-class': true },
+            props: {
+              modifier: true,
+            },
+          });
+        },
+      });
+
+      const componentWrapper = mount(PresenterWrapper);
+
+      expect(componentWrapper.classes()).toEqual(['Presenter', 'mix-class', 'Presenter_modifier']);
+    });
   });
 
   describe('with enhancer', () => {
