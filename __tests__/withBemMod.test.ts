@@ -214,7 +214,7 @@ describe('withBemMod', () => {
       return compose(Enhanced1)(Presenter);
     };
 
-    it('should emit modifier native listener  if turned on', () => {
+    it('should emit modifier native listener if turned on', () => {
       const state = Vue.observable({
         counter: 0,
       });
