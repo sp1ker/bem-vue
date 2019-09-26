@@ -1,5 +1,5 @@
 {
-  "name": "bem-vue",
+  "name": "@sp1ker/bem-vue",
   "version": "1.0.0",
   "description": "Package helps organize and manage components with BEM modifiers in Vue.",
   "main": "lib/vue-bem.js",
