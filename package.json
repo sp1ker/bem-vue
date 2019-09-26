@@ -9,6 +9,9 @@
   "files": [
     "lib/"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "test": "jest --config jestconfig.json",
     "start": "cross-env TARGET=es rollup -c -w",
