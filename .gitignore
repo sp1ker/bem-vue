@@ -1,3 +1,10 @@
 .idea
 node_modules
-lib/
+.DS_Store
+package-lock.json
+*.log
+dist
+lib
+.vscode
+.rpt2_cache
+TODO.md
